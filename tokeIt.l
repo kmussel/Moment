@@ -172,7 +172,6 @@ this              { yylval.number = 0;  return THIS;        }
             strncat(hr, &new[1], 2);
             hr[5] = '\0';
 
-            printf("newmilitary time= %s \n", hr);
             yylval.string = strdup(hr);
             return MILITARYTIME;
         }

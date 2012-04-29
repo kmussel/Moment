@@ -35,14 +35,13 @@ program expr         {
 //        NSLog(@"UNIXTIMESTAMP = %d \n", curtime2);  
 //        NSLog(@"perty time = %s\n", asctime(str_time));
 //        NSLog(@"modifier num = %d", *mymodifier.changePointer);
-        
+
         $<number>$ = curtime2;
 
         for(int i=0; i<9; i++){
             fromChangeAmount[i] += changeAmount[i];
             changeAmount[i] = 0;            
         }
-
 
         set_time.tm_sec = temp_time.tm_sec >=0 ? temp_time.tm_sec : set_time.tm_sec;
         set_time.tm_min = temp_time.tm_min >=0 ? temp_time.tm_min : set_time.tm_min;
@@ -52,6 +51,7 @@ program expr         {
         set_time.tm_mon = temp_time.tm_mon >= 0  ? temp_time.tm_mon : set_time.tm_mon;
         set_time.tm_year = temp_time.tm_year >= 0 ? temp_time.tm_year : set_time.tm_year;
 
+    
         temp_time.tm_sec = -1;
         temp_time.tm_min = -1;
         temp_time.tm_hour = -1;
@@ -64,9 +64,6 @@ program expr         {
         finalSpecAmount[1] = specAmount[1] != 0 ? specAmount[1] : finalSpecAmount[1];
         finalSpecAmount[2] = specAmount[2] != 0 ? specAmount[2] : finalSpecAmount[2];
 
-//                NSLog(@"before final time = %s\n", asctime(&set_time));
-
-       
 
 //        NSLog(@"topLevel change amount = %s\n", join_strings(fromChangeAmount, ",", 9));
 //        NSLog(@"topLevel spec amount = %s\n", join_strings(fromModifier.specAmount, ",", 3));
@@ -80,7 +77,6 @@ expr:
 expr BEFOREAFTER
 {
 
-//    NSLog(@"before = %d", $<number>2);
 //    NSLog(@"inside before = %s\n", join_strings(fromModifier.amount, ",", 9));
 
     if($<number>2 == -1)
@@ -122,8 +118,6 @@ FROM expr     {
     
     str_time= localtime(&tempTime);
     
-//    NSLog(@"str time = %s\n", asctime(str_time));
-    
     for(int i=0; i<7; i++){
         *timePointer[i] += mymodifier.amount[i];
         mymodifier.amount[i] = 0;
@@ -156,17 +150,16 @@ INTEGER     {                                  /********  ex. 6 (means the time 
             if($<number>1 < 12) $<number>1 += 12;
             else if($<number>1 == 12) $<number>1 = 0;
         }
-
         temp_time.tm_hour = $<number>1;
-
-    }
+        temp_time.tm_min = 0;
+        temp_time.tm_sec = 0;    
+}
 
 |
-MONTHNUM           {                                    /***** ex. "June"  ******/
-
-        temp_time.tm_mon = $<number>1;
-        
-    }
+MONTHNUM           
+{                                    /***** ex. "June"  ******/
+        temp_time.tm_mon = $<number>1;        
+}
 |
 DAYOFWEEK                                               /*****  ex.  "Friday"    *****/
 {
@@ -175,7 +168,6 @@ DAYOFWEEK                                               /*****  ex.  "Friday"   
     else if($<number>1 == 0) changeAmount[3] = 0;
     else
       temp_time.tm_wday = $<number>1-1;
-
 }
 |
 IN INTEGER
@@ -207,6 +199,13 @@ IN INTEGER TYPENAMES    {                        /********  ex. "in 3 days" or "
         $<number>2 *= 7;
     }   
     changeAmount[$<number>3] = $<number>2;
+}
+|
+TYPENAMES {
+    if ($<number>1 == 3)
+    {
+        mymodifier.amount[$<number>1] += 1;
+    }
 }
 |
 
@@ -271,7 +270,6 @@ LASTNEXT MONTHNUM                                /********  ex. "last May"  or "
 |
 INTEGER INTHE generalTimes  {                       /********  ex. " 6 in the morning"      ******/
 
-// NSLog(@"INT in the morning");
         if($<number>3 > 0)
         {
             if($<number>1 < 12)
@@ -328,7 +326,6 @@ whenTime INTHE generalTimes                        /*******   4:30 in the aftern
         specAmount[2] = 1;
 }
 |
-
 generalTimes   {}                                   /****** ex. "morning"       *******/
 |
 

@@ -123,6 +123,7 @@ void setFinalTime(struct tm *temp, int amount[], int *change)
 
 
     time_t tempTime = mktime(str_time);
+
     str_time= localtime(&tempTime);
 
     if(temp->tm_year >= 0)
@@ -133,7 +134,7 @@ void setFinalTime(struct tm *temp, int amount[], int *change)
     *timePointer[6] += change[6];
     
     tempTime = mktime(str_time);
-
+        
     str_time= localtime(&tempTime);
 
     if(temp->tm_mon >= 0)
@@ -169,6 +170,7 @@ void setFinalTime(struct tm *temp, int amount[], int *change)
         }
    
     }
+    
     *timePointer[5] += change[5];
 
 
@@ -254,9 +256,7 @@ void setFinalTime(struct tm *temp, int amount[], int *change)
                 break;
         }
     }
-    
-//    printf("tm hour= %d", temp->tm_hour);
-    
+
     if(temp->tm_hour >= 0)
         str_time->tm_hour = temp->tm_hour;
     if(temp->tm_min >= 0)
