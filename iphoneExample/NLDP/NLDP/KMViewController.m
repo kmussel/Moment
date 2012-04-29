@@ -45,9 +45,7 @@
     char *whenstr = (char *)[when UTF8String];
     time_t finalTime = parseDateTimeString(whenstr);
     str_time= localtime(&finalTime);
-    //    int sendTime = (long)finalTime;   
-    
-    //    NSLog(@"the str_time = %ld", finalTime);
+
     NSString *thedate = [NSString stringWithCString:asctime(str_time) encoding:NSUTF8StringEncoding];
     self.timeLabel.text = thedate;    
     

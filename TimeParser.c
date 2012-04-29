@@ -121,7 +121,7 @@ char* join_strings(int* strings, char* seperator, int count) {
 void setFinalTime(struct tm *temp, int amount[], int *change)
 {
 
-
+//    printf("set final time BEFORE=  temp time= %s\n", asctime(str_time));   
     time_t tempTime = mktime(str_time);
 
     str_time= localtime(&tempTime);
@@ -137,12 +137,14 @@ void setFinalTime(struct tm *temp, int amount[], int *change)
         
     str_time= localtime(&tempTime);
 
+
+    int mon = str_time->tm_mon;
     if(temp->tm_mon >= 0)
     {
         amount[2] = 0;
         if(temp->tm_mon >=12)
         {
-            str_time->tm_mon = temp->tm_mon-12;
+            str_time->tm_mon = mon = temp->tm_mon-12;
             str_time->tm_year +=1;
             
         }
@@ -166,16 +168,21 @@ void setFinalTime(struct tm *temp, int amount[], int *change)
             {
                 str_time->tm_year += amount[0];  
             }
-            str_time->tm_mon = temp->tm_mon;
+            str_time->tm_mon = mon = temp->tm_mon;
         }
    
     }
+//    printf("set final time after=  temp time= %s\n", asctime(str_time));    
     
     *timePointer[5] += change[5];
 
 
     tempTime = mktime(str_time);
     str_time= localtime(&tempTime);
+    
+    if(str_time->tm_mon != (mon+change[5]))
+        str_time->tm_mon = (mon+change[5]);
+    
 
     /*******  change[7] is the number of weeks ******/
     if(change[7])
