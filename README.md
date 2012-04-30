@@ -1,7 +1,7 @@
 Moment
 ======
 
-Natural Language Date/Time Parser Using Flex/Yacc/C  
+Natural Language Date/Time Parser Using Lex/Yacc/C  
 
 Moment handles simple and complex expressions.  Because it's written in C, it can easily be transferred to many other languages. 
 <pre>
