@@ -43,11 +43,7 @@
 {
     NSString *when = [textField.text lowercaseString];
     char *whenstr = (char *)[when UTF8String];
-    NSDate *first = [NSDate date];
-    time_t finalTime = parseDateTimeString(whenstr);
-    NSDate *final = [NSDate date];
-    NSTimeInterval executionTime1 = [final timeIntervalSinceDate:first];            
-    NSLog(@"ALIAS MATCH finish TIME = %lf", executionTime1);               
+    time_t finalTime = parseDateTimeString(whenstr);              
     str_time= localtime(&finalTime);
 
     NSString *thedate = [NSString stringWithCString:asctime(str_time) encoding:NSUTF8StringEncoding];
