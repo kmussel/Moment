@@ -52,7 +52,7 @@ int specAmount[3];
 int finalSpecAmount[3];
 
 
-void setCurrentTime();
+void setCurrentTime(void);
 void setTime(int hr, int min, int sec);
 void setDate(int day, int month, int year, int wday);
 
@@ -62,4 +62,4 @@ void setDayOfWeek(int weekday, int *amount);
 void setFinalTime(struct tm *temp, int amount[], int *change);
 void itoa(int n, char s[]);
 
-time_t parseDateTimeString(char *str);
+time_t parseDateTimeString(const char *str);
