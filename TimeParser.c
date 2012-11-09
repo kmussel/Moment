@@ -357,7 +357,7 @@ void setDayOfWeek(int weekday, int *amount)
 }
 
 /* reverse:  reverse string s in place */
-void reverse(char s[])
+static void reverse(char s[])
 {
     int i, j;
     char c;
