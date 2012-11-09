@@ -386,7 +386,7 @@ void itoa(int n, char s[])
 }
 
 
-time_t parseDateTimeString(char *str)
+time_t parseDateTimeString(const char *str)
 {
     yy_switch_to_buffer(yy_scan_string(str));
     yyparse();

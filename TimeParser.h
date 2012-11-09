@@ -62,4 +62,4 @@ void setDayOfWeek(int weekday, int *amount);
 void setFinalTime(struct tm *temp, int amount[], int *change);
 void itoa(int n, char s[]);
 
-time_t parseDateTimeString(char *str);
+time_t parseDateTimeString(const char *str);
