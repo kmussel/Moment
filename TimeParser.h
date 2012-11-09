@@ -52,7 +52,7 @@ int specAmount[3];
 int finalSpecAmount[3];
 
 
-void setCurrentTime();
+void setCurrentTime(void);
 void setTime(int hr, int min, int sec);
 void setDate(int day, int month, int year, int wday);
 
