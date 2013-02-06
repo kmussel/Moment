@@ -7,6 +7,8 @@
 #include <time.h>
 #include "y.tab.h"
 
+#define YY_NO_INPUT
+
 extern time_t curtime;
 extern struct tm temp_time;
 
@@ -20,7 +22,7 @@ void parseYearMonthDayStr(char *text, char *tok);
 
 %}
 
-
+%option nounput
 
 dateTimeTerms    (sec(ond)?|min(ute)?|hour|hr|day|week|month|year)s?
 

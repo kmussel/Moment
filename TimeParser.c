@@ -357,7 +357,7 @@ void setDayOfWeek(int weekday, int *amount)
 }
 
 /* reverse:  reverse string s in place */
-void reverse(char s[])
+static void reverse(char s[])
 {
     int i, j;
     char c;
@@ -386,7 +386,7 @@ void itoa(int n, char s[])
 }
 
 
-time_t parseDateTimeString(char *str)
+time_t parseDateTimeString(const char *str)
 {
     yy_switch_to_buffer(yy_scan_string(str));
     yyparse();
