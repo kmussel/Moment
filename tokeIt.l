@@ -24,7 +24,7 @@ void parseYearMonthDayStr(char *text, char *tok);
 
 dateTimeTerms    (sec(ond)?|min(ute)?|hour|hr|day|week|month|year)s?
 
-regularTime     ((0?[1-9])|(1[1|2]))((:[0-5][0-9](" "?(a|p)\.?m\.?)?)|(" "?(a|p)\.?m\.?))
+regularTime     ((0?[1-9])|(1[0|1|2]))((:[0-5][0-9](" "?(a|p)\.?m\.?)?)|(" "?(a|p)\.?m\.?))
 militaryTime    (([0-1][0-9])|([2][0-3])):?([0-5][0-9])
 specificTimes   noon|midnight
 generalTime     (morning|afternoon|evening|night)s?
