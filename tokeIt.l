@@ -168,7 +168,7 @@ this              { yylval.number = 0;  return THIS;        }
             char hr[7] = "";
             strncat(hr, new, 2);
             hr[2] = ':';
-            strncat(hr, &new[2], 2);
+            strncat(hr, &new[strlen(new)-2], 2);
 
             hr[2] = ':';
             strncat(hr, &new[1], 2);
