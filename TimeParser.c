@@ -59,6 +59,8 @@ void setCurrentTime()
         fromModifier.amount[i] = 0;
     }
     
+    unusedText = NULL;
+    
 //    str_time->tm_year = 139;
 //    time_t finalTime = mktime(str_time);    
 //    str_time= localtime(&finalTime);

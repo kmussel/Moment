@@ -51,6 +51,8 @@ int fromChangeAmount[9];
 int specAmount[3];
 int finalSpecAmount[3];
 
+char * unusedText;
+
 
 void setCurrentTime(void);
 void setTime(int hr, int min, int sec);

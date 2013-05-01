@@ -43,8 +43,10 @@
 {
     NSString *when = [textField.text lowercaseString];
     char *whenstr = (char *)[when UTF8String];
-    time_t finalTime = parseDateTimeString(whenstr);              
+    time_t finalTime = parseDateTimeString(whenstr);
     str_time= localtime(&finalTime);
+    
+//    NSLog(@"the string is %s", unusedText);
 
     NSString *thedate = [NSString stringWithCString:asctime(str_time) encoding:NSUTF8StringEncoding];
     self.timeLabel.text = thedate;    

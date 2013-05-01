@@ -13,9 +13,11 @@ extern time_t curtime;
 extern struct tm temp_time;
 
 extern struct tm *str_time;
+extern char * unusedText;
 
 void yyerror(char *);
 
+void concatUnusedString(char *newstr);
 void parseMonthDayStr(char *text, char *tok);
 void parseDayMonthStr(char *text, char *tok);
 void parseYearMonthDayStr(char *text, char *tok);
@@ -23,6 +25,8 @@ void parseYearMonthDayStr(char *text, char *tok);
 %}
 
 %option nounput
+
+%x error
 
 dateTimeTerms    (sec(ond)?|min(ute)?|hour|hr|day|week|month|year)s?
 
@@ -352,11 +356,22 @@ this              { yylval.number = 0;  return THIS;        }
 
 at|@    {yylval.string = yytext; return ARTICLEPREP; } 
 the         ;
-[ \t,]       ;       /* skip whitespace */
+[ \t,]       { concatUnusedString(strdup(yytext));  BEGIN(INITIAL);   }       /* skip whitespace */
+<error>[ \t,]       { concatUnusedString(strdup(yytext));  BEGIN(INITIAL);  }       /* skip whitespace in error state */
 \+|plus       { yylval.number = 1; return PLUS;}
 
 
-.           yyerror("Unknown character");
+.     {
+
+    BEGIN(error);
+    concatUnusedString(strdup(yytext));
+//    yyerror("Unknown character");
+ }
+ 
+<error>. {
+        concatUnusedString(strdup(yytext));
+//    printf("error character is = %s\n", yytext);
+}
 
 %%
 
@@ -403,6 +418,28 @@ void parseYearMonthDayStr(char *text, char *tok)
             temp_time.tm_mday = atoi(parts);
     }
 }
+
+void concatUnusedString(char *strnew)
+{
+
+    size_t len = 0;
+    char *str = "";    
+    if(unusedText!=NULL)
+    {
+
+        len = strlen(unusedText); /* could use 'sizeof' instead of strlen in this example */
+        str = unusedText;
+    }
+   
+    char *str2 = malloc(len + strlen(strnew) + 1 ); 
+    strcpy(str2, str);
+    strcat (str2, strnew);    
+
+    free(unusedText);
+    unusedText = str2;
+
+}
+
 int yywrap(void) {
     return 1;
 }
