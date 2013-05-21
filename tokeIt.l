@@ -181,7 +181,7 @@ this              { yylval.number = 0;  return THIS;        }
             yylval.string = strdup(hr);
             return MILITARYTIME;
         }
-{onDay}           { yylval.string=strdup(yytext); return DAYOFWEEK; }
+
 {months}          { 
                     switch(yytext[0])
                     {

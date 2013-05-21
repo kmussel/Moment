@@ -632,6 +632,6 @@ WHENTIME     {
 %%
 
 void yyerror(char *s) {
-    NSLog(@"error");
+//    NSLog(@"error");
     fprintf(stderr, "%s\n", s);
 }
