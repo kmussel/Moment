@@ -579,6 +579,12 @@ GENERALTIME {
                 temp_time.tm_hour = 21;
             }
             break;
+            // addition for tonight
+            case 't':
+            {
+                temp_time.tm_hour = 21;
+            }
+            break;
         }
     }
     else if($<number>1== 'm') $<number>$ = 0;
