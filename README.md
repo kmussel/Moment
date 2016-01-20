@@ -1,6 +1,8 @@
 Moment
 ======
 
+UPDATE:  Moved to its own Repo to be used with multiple languages at [MomentLib](https://github.com/momentlib/core)
+
 Natural Language Date/Time Parser Using Lex/Yacc/C  
 
 Moment handles simple and complex expressions.  Because it's written in C, it can easily be transferred to many other languages. 
